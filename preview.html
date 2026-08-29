@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Standalone - Sistem Informasi UKRI</title>
+
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#1A2E4C',
+                            darknavy: '#021936',
+                            teal: '#0E7C7B',
+                            darkteal: '#006A69',
+                            gold: '#C9A227',
+                            lightbg: '#F6FAFE',
+                            surface: '#EAEER2',
+                            slate: '#171C1F',
+                            muted: '#44474E'
+                        }
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F6FAFE;
+            color: #171C1F;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body x-data="{ currentPage: 'beranda', mobileOpen: false, openDropdown: null }" class="flex flex-col min-h-screen bg-brand-lightbg text-brand-slate antialiased">
+
+    <!-- Sticky Preview Switcher Banner -->
+    <div class="bg-brand-gold text-brand-darknavy text-xs font-semibold py-2 px-4 shadow-md flex justify-between items-center z-50">
+        <span class="flex items-center"><svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg> PREVIEW MODE (Tampilan Statis Langsung Browser)</span>
+        <div class="flex items-center space-x-2">
+            <span>Pilih Halaman:</span>
+            <select x-model="currentPage" class="bg-white text-brand-darknavy text-xs font-bold px-3 py-1 rounded-lg border border-slate-300 focus:outline-none">
+                <option value="beranda">01. Beranda Utama</option>
+                <option value="sejarah">02.1 Tentang Kami - Sejarah</option>
+                <option value="visi-misi">02.2 Tentang Kami - Visi Misi</option>
+                <option value="akreditasi">02.3 Tentang Kami - Akreditasi</option>
+                <option value="dosen-staf">02.4 Tentang Kami - Dosen & Staf</option>
+                <option value="kerja-sama">02.5 Tentang Kami - Kemitraan</option>
+                <option value="kurikulum">03.1 Akademik - Struktur Kurikulum</option>
+                <option value="kbk">03.2 Akademik - Kelompok Keahlian</option>
+                <option value="matakuliah">03.3 Akademik - Daftar Mata Kuliah</option>
+                <option value="kalender">03.4 Akademik - Kalender Akademik</option>
+                <option value="prestasi">04.1 Kemahasiswaan - Prestasi</option>
+                <option value="hima">04.2 Kemahasiswaan - HIMASI</option>
+                <option value="alumni">04.3 Kemahasiswaan - Alumni</option>
+                <option value="berita">05.1 Berita - Index Berita</option>
+                <option value="berita-detail">05.2 Berita - Detail Artikel</option>
+                <option value="kontak">06. Kontak & PMB</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Header Navbar -->
+    <header class="sticky top-0 z-40 bg-brand-navy shadow-lg text-white">
+        <div class="bg-brand-darknavy text-xs py-2 px-4 sm:px-8 border-b border-slate-700/50">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+                <div class="flex items-center space-x-6 text-slate-300">
+                    <span class="flex items-center"><svg class="w-3.5 h-3.5 mr-1.5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> si@ukri.ac.id</span>
+                    <span class="hidden md:flex items-center"><svg class="w-3.5 h-3.5 mr-1.5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg> (022) 7315175</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="bg-brand-gold/20 text-brand-gold border border-brand-gold/30 px-2.5 py-0.5 rounded-full font-semibold text-[10px]">AKREDITASI "A"</span>
+                    <button @click="currentPage = 'kontak'" class="text-brand-teal hover:text-white transition-colors font-medium">PMB SI UKRI &rarr;</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a @click.prevent="currentPage = 'beranda'" href="#" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 bg-gradient-to-tr from-brand-teal to-brand-gold rounded-xl flex items-center justify-center font-bold text-lg text-white shadow-md">
+                        SI
+                    </div>
+                    <div>
+                        <span class="font-poppins font-bold text-lg tracking-wide text-white block leading-tight">SISTEM INFORMASI</span>
+                        <span class="text-xs text-brand-gold font-medium tracking-widest block uppercase">Universitas Kebangsaan</span>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center space-x-1 font-inter text-sm font-medium">
+                    <button @click="currentPage = 'beranda'" :class="currentPage === 'beranda' ? 'bg-white/20 text-white' : 'text-slate-200'" class="px-3.5 py-2 rounded-lg hover:text-white hover:bg-white/10 transition-colors">Beranda</button>
+                    <button @click="currentPage = 'sejarah'" :class="currentPage === 'sejarah' ? 'bg-white/20 text-white' : 'text-slate-200'" class="px-3.5 py-2 rounded-lg hover:text-white hover:bg-white/10 transition-colors">Sejarah</button>
+                    <button @click="currentPage = 'visi-misi'" :class="currentPage === 'visi-misi' ? 'bg-white/20 text-white' : 'text-slate-200'" class="px-3.5 py-2 rounded-lg hover:text-white hover:bg-white/10 transition-colors">Visi & Misi</button>
+                    <button @click="currentPage = 'akreditasi'" :class="currentPage === 'akreditasi' ? 'bg-white/20 text-white' : 'text-slate-200'" class="px-3.5 py-2 rounded-lg hover:text-white hover:bg-white/10 transition-colors">Akreditasi</button>
+                    <button @click="currentPage = 'dosen-staf'" :class="currentPage === 'dosen-staf' ? 'bg-white/20 text-white' : 'text-slate-200'" class="px-3.5 py-2 rounded-lg hover:text-white hover:bg-white/10 transition-colors">Dosen & Staf</button>
+                    <button @click="currentPage = 'kurikulum'" :class="currentPage === 'kurikulum' ? 'bg-white/20 text-white' : 'text-slate-200'" class="px-3.5 py-2 rounded-lg hover:text-white hover:bg-white/10 transition-colors">Kurikulum</button>
+                    <button @click="currentPage = 'kontak'" :class="currentPage === 'kontak' ? 'bg-white/20 text-white' : 'text-slate-200'" class="px-3.5 py-2 rounded-lg hover:text-white hover:bg-white/10 transition-colors">Kontak</button>
+                </nav>
+
+                <div class="hidden lg:flex items-center space-x-3">
+                    <button @click="currentPage = 'kontak'" class="bg-brand-teal hover:bg-brand-darkteal text-white font-medium text-sm px-5 py-2.5 rounded-xl shadow-md transition-all">
+                        PMB 2026/2027
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Dynamic View Switcher -->
+    <main class="flex-grow">
+
+        <!-- Page: Beranda -->
+        <div x-show="currentPage === 'beranda'">
+            <section class="relative bg-gradient-to-br from-brand-navy via-brand-darknavy to-slate-900 text-white overflow-hidden py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <div class="inline-flex items-center space-x-2 bg-brand-gold/20 border border-brand-gold/40 text-brand-gold px-4 py-1.5 rounded-full text-xs font-semibold">
+                                <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+                                <span>PENDAFTARAN MAHASISWA BARU TA 2026/2027 DIBUKA</span>
+                            </div>
+                            <h1 class="font-poppins font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
+                                Membangun Talenta Digital & <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-teal-300">Enterprise Solution</span> Berkarakter Kebangsaan
+                            </h1>
+                            <p class="font-inter text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                                Program Studi Sistem Informasi Universitas Kebangsaan Republik Indonesia membekali mahasiswa dengan keahlian Data Science, Software Engineering, dan Digital Business Transformation.
+                            </p>
+                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                                <button @click="currentPage = 'kontak'" class="w-full sm:w-auto bg-brand-teal hover:bg-brand-darkteal text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg transition-all">
+                                    Daftar Sekarang &rarr;
+                                </button>
+                                <button @click="currentPage = 'kurikulum'" class="w-full sm:w-auto border-2 border-slate-500 hover:border-white text-slate-200 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition-all">
+                                    Lihat Kurikulum
+                                </button>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5 relative">
+                            <div class="bg-gradient-to-b from-slate-800 to-brand-darknavy p-6 rounded-2xl border border-slate-700 shadow-2xl text-center space-y-4">
+                                <h3 class="font-poppins font-bold text-xl text-brand-gold">Akreditasi "A" BAN-PT</h3>
+                                <p class="text-xs text-slate-300">Program Studi Sistem Informasi UKRI berperingkat Unggul / Akreditasi A dari Badan Akreditasi Nasional Perguruan Tinggi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Page: Kontak -->
+        <div x-show="currentPage === 'kontak'">
+            <div class="bg-gradient-to-r from-brand-navy via-brand-darknavy to-slate-900 text-white py-12 px-8">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="font-poppins font-bold text-3xl sm:text-4xl text-white">Hubungi Kami & Pendaftaran PMB</h1>
+                    <p class="text-slate-300 mt-2">Sekretariat Program Studi Sistem Informasi UKRI & Layanan Pendaftaran Mahasiswa Baru.</p>
+                </div>
+            </div>
+            <section class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                        <div class="lg:col-span-7 bg-brand-lightbg p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+                            <h2 class="font-poppins font-bold text-2xl text-brand-navy">Form Pertanyaan & Pendaftaran</h2>
+                            <form class="space-y-4 font-inter text-sm">
+                                <div>
+                                    <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap</label>
+                                    <input type="text" placeholder="Masukkan nama Anda" class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white">
+                                </div>
+                                <div>
+                                    <label class="block font-semibold text-slate-700 mb-1">Email / WhatsApp</label>
+                                    <input type="text" placeholder="contoh@email.com / 0812..." class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white">
+                                </div>
+                                <button type="button" class="w-full bg-brand-teal text-white font-poppins font-semibold py-3.5 rounded-xl shadow-md">
+                                    Kirim Pesan Sekarang &rarr;
+                                </button>
+                            </form>
+                        </div>
+                        <div class="lg:col-span-5 bg-brand-navy text-white p-8 rounded-3xl space-y-4">
+                            <h3 class="font-poppins font-bold text-xl text-brand-gold">Sekretariat SI UKRI</h3>
+                            <p class="text-sm">Jl. Terusan Halimun No.37, Lengkong, Kota Bandung, Jawa Barat 40263</p>
+                            <p class="text-sm">Telepon: (022) 7315175</p>
+                            <p class="text-sm">Email: si@ukri.ac.id</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Generic View Placeholder for Other Pages in Preview Mode -->
+        <div x-show="!['beranda', 'kontak'].includes(currentPage)" class="py-16 text-center space-y-4">
+            <div class="max-w-3xl mx-auto bg-white p-12 rounded-3xl border border-slate-200 shadow-sm">
+                <span class="text-xs font-semibold text-brand-teal bg-brand-teal/10 px-3 py-1 rounded-full uppercase tracking-wider" x-text="currentPage"></span>
+                <h2 class="font-poppins font-bold text-2xl text-brand-navy mt-4" x-text="'Halaman Template Blade: resources/views/' + currentPage + '.blade.php'"></h2>
+                <p class="text-slate-600 text-sm mt-2">Halaman Blade View lengkap sudah dibuat di folder <code>resources/views/</code>. Untuk menjalankan seluruh routing dinamis, Anda dapat menggunakan PHP Laragon / Artisan.</p>
+                <div class="pt-6">
+                    <button @click="currentPage = 'beranda'" class="bg-brand-navy text-white text-xs font-semibold px-5 py-2.5 rounded-xl">Kembali ke Beranda</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-darknavy text-slate-300 font-inter pt-12 pb-8 border-t border-slate-800 text-center text-xs">
+        <p>&copy; 2026 Program Studi Sistem Informasi - Universitas Kebangsaan Republik Indonesia.</p>
+    </footer>
+</body>
+</html>
