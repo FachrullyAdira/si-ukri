@@ -6,9 +6,17 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        .dosen-swiper .swiper-wrapper {
-            -webkit-transition-timing-function: linear !important;
-            transition-timing-function: linear !important;
+        .dosen-swiper {
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .dosen-swiper:active {
+            cursor: grabbing;
+        }
+        .dosen-swiper .swiper-slide {
+            height: auto;
+            display: flex;
         }
     </style>
 @endpush
@@ -23,21 +31,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <a href="https://pmb.ukri.ac.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-gradient-to-r from-brand-red/20 to-amber-500/20 border border-brand-red/40 text-amber-300 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-md hover:border-brand-red transition-all">
+                    <a href="{{ $settings['pmb_link'] ?? 'https://pmb.ukri.ac.id/' }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-gradient-to-r from-brand-red/20 to-amber-500/20 border border-brand-red/40 text-amber-300 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-md hover:border-brand-red transition-all">
                         <span class="w-2.5 h-2.5 rounded-full bg-brand-red animate-ping"></span>
-                        <span>PENDAFTARAN MAHASISWA BARU TA 2026/2027 DIBUKA &rarr;</span>
+                        <span>{{ $settings['pmb_text'] ?? 'PENDAFTARAN MAHASISWA BARU DIBUKA' }} &rarr;</span>
                     </a>
 
                     <h1 class="font-poppins font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
-                        Membangun Talenta Digital & <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-300 to-white">Enterprise Solution</span> Berkarakter Kebangsaan
+                        {{ $settings['hero_title'] ?? 'Membangun Talenta Digital Berkarakter Kebangsaan' }}
                     </h1>
 
                     <p class="font-inter text-emerald-100 text-base sm:text-lg leading-relaxed max-w-2xl">
-                        Program Studi Sistem Informasi Universitas Kebangsaan Republik Indonesia membekali mahasiswa dengan keahlian Data Science, Software Engineering, dan Digital Business Transformation.
+                        {{ $settings['hero_subtitle'] ?? 'Program Studi Sistem Informasi Universitas Kebangsaan Republik Indonesia membekali mahasiswa dengan keahlian teknologi terkini.' }}
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="https://pmb.ukri.ac.id/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-gradient-to-r from-brand-red via-rose-600 to-red-600 hover:from-red-600 hover:to-brand-red text-white font-bold px-8 py-4 rounded-xl shadow-xl hover:shadow-red-500/30 transition-all transform hover:-translate-y-0.5 text-center">
+                        <a href="{{ $settings['pmb_link'] ?? 'https://pmb.ukri.ac.id/' }}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-gradient-to-r from-brand-red via-rose-600 to-red-600 hover:from-red-600 hover:to-brand-red text-white font-bold px-8 py-4 rounded-xl shadow-xl hover:shadow-red-500/30 transition-all transform hover:-translate-y-0.5 text-center">
                             Daftar PMB Online &rarr;
                         </a>
                         <a href="{{ route('akademik.kurikulum') }}" class="w-full sm:w-auto border-2 border-white/60 hover:border-white text-white font-semibold px-8 py-4 rounded-xl transition-all text-center hover:bg-white/10 backdrop-blur-sm">
@@ -199,7 +207,7 @@
                     <div class="space-y-3">
                         <span class="text-xs font-bold text-brand-green uppercase tracking-widest bg-emerald-100/80 px-4 py-1.5 rounded-full border border-emerald-300">Sambutan Ketua Program Studi</span>
                         <h2 class="font-poppins font-extrabold text-3xl sm:text-4xl text-slate-900 leading-tight">
-                            Mempersiapkan Generasi Unggul di Era Transformasi Digital
+                            {{ $settings['sambutan_judul'] ?? 'Mempersiapkan Generasi Unggul di Era Transformasi Digital' }}
                         </h2>
                     </div>
 
@@ -211,13 +219,8 @@
                     </div>
 
                     <!-- Speech Body Paragraphs -->
-                    <div class="space-y-4 font-inter text-slate-700 text-sm sm:text-base leading-relaxed">
-                        <p>
-                            Perkembangan teknologi informasi, kecerdasan buatan (<em class="italic font-medium text-slate-800">Artificial Intelligence</em>), serta arsitektur data enterprise telah mengubah secara fundamental lanskap industri global. Program Studi Sistem Informasi UKRI hadir sebagai kawah candradimuka bagi calon praktisi dan inovator digital yang memiliki kapabilitas teknis tinggi sekaligus landasan wawasan kebangsaan yang kokoh.
-                        </p>
-                        <p>
-                            Kurikulum kami dirancang berbasis standar <em class="italic font-medium text-slate-800">Outcome-Based Education</em> (OBE) dan terintegrasi langsung dengan sertifikasi kompetensi industri terkemuka seperti SAP, Oracle Academy, dan Data Analytics. Kami berkomitmen tidak hanya mencetak kelulusan berdaya saing tinggi, tetapi juga melahirkan calon pengusaha teknologi (<em class="italic font-medium text-slate-800">technopreneur</em>) yang mampu memberikan solusi nyata bagi bangsa.
-                        </p>
+                    <div class="space-y-4 font-inter text-slate-700 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">
+                        {{ $settings['sambutan_teks'] ?? 'Perkembangan teknologi informasi...' }}
                     </div>
 
                     <!-- Signature & CTA Actions -->
@@ -246,9 +249,20 @@
                     <span class="text-xs font-bold text-brand-green uppercase tracking-widest bg-emerald-100/80 px-4 py-1.5 rounded-full border border-emerald-300">Tim Pengajar Professional</span>
                     <h2 class="font-poppins font-extrabold text-3xl sm:text-4xl text-slate-900">Jajaran Dosen & Staf Program Studi</h2>
                 </div>
-                <a href="{{ route('tentang.dosen-staf') }}" class="inline-flex items-center text-xs font-bold text-brand-green hover:text-brand-darkgreen bg-emerald-50 border border-brand-green/20 px-4 py-2.5 rounded-xl hover:bg-emerald-100 transition-all">
-                    Lihat Semua Dosen &rarr;
-                </a>
+                <div class="flex items-center gap-3">
+                    <!-- Navigation Buttons -->
+                    <div class="flex items-center gap-2">
+                        <button type="button" class="dosen-prev p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-emerald-50 text-slate-700 hover:text-brand-green hover:border-brand-green/40 shadow-xs transition-all flex items-center justify-center cursor-pointer active:scale-95" aria-label="Slide Sebelumnya" title="Sebelumnya">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                        </button>
+                        <button type="button" class="dosen-next p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-emerald-50 text-slate-700 hover:text-brand-green hover:border-brand-green/40 shadow-xs transition-all flex items-center justify-center cursor-pointer active:scale-95" aria-label="Slide Berikutnya" title="Berikutnya">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                    <a href="{{ route('tentang.dosen-staf') }}" class="inline-flex items-center text-xs font-bold text-brand-green hover:text-brand-darkgreen bg-emerald-50 border border-brand-green/20 px-4 py-2.5 rounded-xl hover:bg-emerald-100 transition-all shadow-xs">
+                        Lihat Semua Dosen &rarr;
+                    </a>
+                </div>
             </div>
 
             <!-- Swiper Carousel Container -->
@@ -267,11 +281,12 @@
                             <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl transition-all p-6 flex flex-col items-center text-center space-y-4 hover:border-brand-green group h-full">
                                 <!-- Rounded Profile Photo / Avatar -->
                                 <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-brand-green via-amber-400 to-brand-red shadow-md group-hover:scale-105 transition-transform">
-                                    <div class="w-full h-full rounded-full overflow-hidden bg-gradient-to-tr from-brand-green to-emerald-700 flex items-center justify-center text-white font-poppins font-bold text-2xl shadow-inner">
-                                        @if($dosen->foto)
-                                            <img src="{{ asset('storage/' . $dosen->foto) }}" alt="{{ $dosen->nama }}" class="w-full h-full object-cover">
+                                    <div class="w-full h-full rounded-full overflow-hidden bg-gradient-to-tr from-brand-green to-emerald-700 flex items-center justify-center text-white font-poppins font-bold text-2xl shadow-inner relative">
+                                        @if($dosen->foto_url)
+                                            <img src="{{ $dosen->foto_url }}" alt="{{ $dosen->nama }}" class="w-full h-full object-cover" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                                            <span class="hidden font-poppins font-bold text-2xl">{{ substr($dosen->nama, 0, 2) }}</span>
                                         @else
-                                            {{ substr($dosen->nama, 0, 2) }}
+                                            <span>{{ substr($dosen->nama, 0, 2) }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -316,8 +331,12 @@
                         <div class="h-1.5 w-full bg-gradient-to-r from-brand-red via-brand-amber to-brand-green"></div>
 
                         <div class="p-8 space-y-4">
-                            <div class="w-14 h-14 bg-gradient-to-tr from-brand-green to-emerald-700 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform font-poppins font-bold text-lg shadow-lg">
-                                {{ substr($kbk->nama, 0, 2) }}
+                            <div class="w-14 h-14 bg-gradient-to-tr from-brand-green to-emerald-700 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform font-poppins font-bold text-lg shadow-lg overflow-hidden p-2.5">
+                                @if($kbk->ikon_url)
+                                    <img src="{{ $kbk->ikon_url }}" alt="{{ $kbk->nama }}" class="w-full h-full object-contain" loading="lazy">
+                                @else
+                                    {{ substr($kbk->nama, 0, 2) }}
+                                @endif
                             </div>
                             <h3 class="font-poppins font-bold text-xl text-slate-900 group-hover:text-brand-green transition-colors">{{ $kbk->nama }}</h3>
                             <p class="text-slate-600 text-sm leading-relaxed">{{ Str::limit($kbk->deskripsi, 120) }}</p>
@@ -334,8 +353,69 @@
         </div>
     </section>
 
-    <!-- Latest News Teaser Section -->
+    <!-- Section Prestasi Mahasiswa Terkini -->
     <section class="py-16 bg-white border-t border-slate-200/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-brand-green uppercase tracking-widest bg-emerald-100/80 px-4 py-1.5 rounded-full border border-emerald-300">Torehan Prestasi Mahasiswa</span>
+                    <h2 class="font-poppins font-extrabold text-3xl sm:text-4xl text-slate-900">Rekam Jejak Prestasi & Kejuaraan</h2>
+                </div>
+                <a href="{{ route('kemahasiswaan.prestasi') }}" class="inline-flex items-center text-xs font-bold text-brand-green hover:text-brand-darkgreen bg-emerald-50 border border-brand-green/20 px-5 py-2.5 rounded-xl hover:bg-emerald-100 transition-all">
+                    Lihat Semua Prestasi &rarr;
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @forelse($prestasis as $prestasi)
+                    <div class="bg-brand-lightbg rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all group hover:border-brand-green flex flex-col justify-between">
+                        <div>
+                            @if($prestasi->foto_url)
+                                <div class="h-48 w-full overflow-hidden relative bg-slate-900">
+                                    <img src="{{ $prestasi->foto_url }}" alt="{{ $prestasi->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent"></div>
+                                    <div class="absolute top-4 left-4 flex items-center gap-2">
+                                        <span class="text-[10px] font-bold text-amber-900 bg-amber-200/90 backdrop-blur-sm border border-amber-300 px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">{{ $prestasi->kategori }}</span>
+                                        <span class="text-[10px] font-bold text-white bg-slate-950/70 backdrop-blur-sm px-2.5 py-0.5 rounded-full">{{ $prestasi->tahun }}</span>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="h-44 bg-gradient-to-tr from-amber-500 via-amber-600 to-amber-700 text-white p-6 flex flex-col justify-between relative overflow-hidden">
+                                    <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+                                    <div class="flex items-center justify-between relative z-10">
+                                        <span class="text-[10px] font-bold text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded-full uppercase">{{ $prestasi->kategori }}</span>
+                                        <span class="text-xs font-bold text-amber-100">{{ $prestasi->tahun }}</span>
+                                    </div>
+                                    <svg class="w-10 h-10 text-white/30 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.504-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.496m5.511 0a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25h-6a2.25 2.25 0 00-2.25 2.25v6.5a2.25 2.25 0 002.25 2.25"/></svg>
+                                </div>
+                            @endif
+
+                            <div class="p-6 space-y-3">
+                                <h3 class="font-poppins font-bold text-lg text-slate-900 group-hover:text-brand-green transition-colors leading-snug">
+                                    {{ $prestasi->judul }}
+                                </h3>
+                                <p class="text-xs font-semibold text-brand-green">Oleh: {{ $prestasi->nama_mahasiswa }}</p>
+                                <p class="text-xs text-slate-600 leading-relaxed">{{ Str::limit($prestasi->deskripsi, 120) }}</p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 pt-0 border-t border-slate-200/80 mt-2">
+                            <a href="{{ route('kemahasiswaan.prestasi') }}" class="text-xs font-bold text-brand-green hover:underline flex items-center pt-3">
+                                Lihat Detail Prestasi &rarr;
+                            </a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-3 text-center py-8 text-slate-500">
+                        Belum ada galeri prestasi yang ditampilkan.
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News Teaser Section -->
+    <section class="py-16 bg-brand-lightbg border-t border-slate-200/80 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10">
                 <div>
@@ -350,14 +430,24 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach($beritas as $berita)
                     <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200/90 flex flex-col hover:border-brand-green transition-all group">
-                        <div class="h-48 bg-gradient-to-tr from-brand-darkgreen via-brand-green to-emerald-800 text-white p-6 font-poppins font-bold flex items-center justify-center text-center shadow-inner relative overflow-hidden">
-                            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-                            <span class="relative z-10 leading-snug group-hover:scale-105 transition-transform">{{ $berita->judul }}</span>
-                        </div>
+                        @if($berita->cover_url)
+                            <div class="h-48 overflow-hidden relative group-hover:opacity-95 transition-all bg-slate-900">
+                                <img src="{{ $berita->cover_url }}" alt="{{ $berita->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
+                                <span class="absolute top-3 left-4 text-[10px] font-bold text-white bg-brand-green/90 backdrop-blur-sm border border-brand-green/40 px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">{{ $berita->kategori }}</span>
+                            </div>
+                        @else
+                            <div class="h-48 bg-gradient-to-tr from-brand-darkgreen via-brand-green to-emerald-800 text-white p-6 font-poppins font-bold flex items-center justify-center text-center shadow-inner relative overflow-hidden">
+                                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                                <span class="relative z-10 leading-snug group-hover:scale-105 transition-transform">{{ $berita->judul }}</span>
+                            </div>
+                        @endif
                         <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                             <div>
-                                <span class="text-[11px] font-bold text-brand-green bg-gradient-to-r from-emerald-50 to-teal-50 border border-brand-green/20 px-3 py-1 rounded-full">{{ $berita->kategori }}</span>
-                                <h3 class="font-poppins font-bold text-lg text-slate-900 mt-3 leading-snug group-hover:text-brand-green transition-colors">
+                                @if(!$berita->cover_url)
+                                    <span class="text-[11px] font-bold text-brand-green bg-gradient-to-r from-emerald-50 to-teal-50 border border-brand-green/20 px-3 py-1 rounded-full">{{ $berita->kategori }}</span>
+                                @endif
+                                <h3 class="font-poppins font-bold text-lg text-slate-900 mt-2 leading-snug group-hover:text-brand-green transition-colors">
                                     <a href="{{ route('berita.show', $berita->slug) }}">{{ $berita->judul }}</a>
                                 </h3>
                                 <p class="text-xs text-slate-500 mt-2">{{ \Carbon\Carbon::parse($berita->tanggal_publikasi)->translatedFormat('d F Y') }} &bull; Oleh {{ $berita->penulis ?? 'Humas SI UKRI' }}</p>
@@ -378,13 +468,25 @@
         document.addEventListener('DOMContentLoaded', function () {
             const swiperDosen = new Swiper('.dosen-swiper', {
                 loop: true,
-                loopAdditionalSlides: 6,
-                speed: 5000,
+                grabCursor: true,
+                simulateTouch: true,
+                allowTouchMove: true,
+                touchRatio: 1.2,
+                mousewheel: {
+                    forceToAxis: true,
+                    releaseOnEdges: true,
+                    sensitivity: 1,
+                },
+                navigation: {
+                    nextEl: '.dosen-next',
+                    prevEl: '.dosen-prev',
+                },
                 autoplay: {
-                    delay: 0,
+                    delay: 3500,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                 },
+                speed: 600,
                 slidesPerView: 1.5,
                 spaceBetween: 16,
                 breakpoints: {

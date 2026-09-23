@@ -14,8 +14,11 @@ class PengaturanSitusResource extends Resource
 {
     protected static ?string $model = PengaturanSitus::class;
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
-    protected static ?string $navigationGroup = 'Pengaturan & Sistem';
+    protected static ?string $navigationGroup = 'Publikasi';
     protected static ?string $label = 'Pengaturan Konten Situs';
+
+    protected static ?string $modelLabel = 'Pengaturan Situs';
+    protected static ?string $pluralModelLabel = 'Data Pengaturan Situs';
 
     public static function form(Form $form): Form
     {
@@ -25,7 +28,8 @@ class PengaturanSitusResource extends Resource
                 Forms\Components\Select::make('group')
                     ->options([
                         'general' => 'Umum',
-                        'beranda' => 'Beranda Utama',
+                        'Beranda' => 'Beranda Utama',
+                        'Beranda - Kaprodi' => 'Beranda (Sambutan Kaprodi)',
                         'kontak' => 'Info Kontak',
                     ])
                     ->default('general')
@@ -49,6 +53,11 @@ class PengaturanSitusResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

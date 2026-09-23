@@ -1,4 +1,15 @@
 <?php return array (
+  'althinect/filament-spatie-roles-permissions' => 
+  array (
+    'aliases' => 
+    array (
+      'FilamentSpatieRolesPermissions' => 'Althinect\\FilamentSpatieRolesPermissions\\FilamentSpatieRolesPermissionsFacade',
+    ),
+    'providers' => 
+    array (
+      0 => 'Althinect\\FilamentSpatieRolesPermissions\\FilamentSpatieRolesPermissionsServiceProvider',
+    ),
+  ),
   'anourvalar/eloquent-serialize' => 
   array (
     'aliases' => 

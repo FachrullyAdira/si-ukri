@@ -17,14 +17,33 @@ class HimaPengurusResource extends Resource
     protected static ?string $navigationGroup = 'Kemahasiswaan & Alumni';
     protected static ?string $label = 'Pengurus HIMASI';
 
+    protected static ?string $modelLabel = 'Hima Pengurus';
+    protected static ?string $pluralModelLabel = 'Data Hima Pengurus';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama')->required(),
-                Forms\Components\TextInput::make('jabatan')->required(),
-                Forms\Components\TextInput::make('periode')->required()->default('2026/2027'),
-                Forms\Components\FileUpload::make('foto')->image(),
+                Forms\Components\TextInput::make('nama')
+                    ->label('Nama Lengkap')
+                    ->required(),
+                Forms\Components\TextInput::make('jabatan')
+                    ->label('Jabatan di Himpunan')
+                    ->placeholder('Contoh: Ketua Himpunan (Kahim)')
+                    ->required(),
+                Forms\Components\TextInput::make('periode')
+                    ->label('Periode Kepengurusan')
+                    ->required()
+                    ->default('2026/2027'),
+                Forms\Components\SpatieMediaLibraryFileUpload::make('foto')
+                    ->collection('foto')
+                    ->image()
+                    ->imageCropAspectRatio('1:1')
+                    ->imageResizeTargetWidth('600')
+                    ->imageResizeTargetHeight('600')
+                    ->maxSize(20480)
+                    ->label('Foto Pengurus')
+                    ->helperText('Format: JPG, PNG, WEBP (Maks 20MB). Rasio 1:1 disarankan.'),
             ]);
     }
 
@@ -32,13 +51,22 @@ class HimaPengurusResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')->searchable(),
-                Tables\Columns\TextColumn::make('jabatan'),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('foto')
+                    ->collection('foto')
+                    ->circular()
+                    ->label('Foto'),
+                Tables\Columns\TextColumn::make('nama')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('jabatan')->searchable(),
                 Tables\Columns\TextColumn::make('periode')->badge(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

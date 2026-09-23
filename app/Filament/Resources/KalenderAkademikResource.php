@@ -17,15 +17,27 @@ class KalenderAkademikResource extends Resource
     protected static ?string $navigationGroup = 'Akademik & Kurikulum';
     protected static ?string $label = 'Kalender Akademik';
 
+    protected static ?string $modelLabel = 'Kalender Akademik';
+    protected static ?string $pluralModelLabel = 'Data Kalender Akademik';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('judul_kegiatan')->required(),
-                Forms\Components\TextInput::make('tahun_akademik')->required()->placeholder('Contoh: 2026/2027 Ganjil'),
-                Forms\Components\DatePicker::make('tanggal_mulai')->required(),
-                Forms\Components\DatePicker::make('tanggal_selesai'),
-                Forms\Components\Textarea::make('keterangan')->columnSpanFull(),
+                Forms\Components\TextInput::make('judul_kegiatan')
+                    ->label('Nama / Judul Kegiatan')
+                    ->required(),
+                Forms\Components\TextInput::make('tahun_akademik')
+                    ->required()
+                    ->placeholder('Contoh: 2026/2027 Ganjil'),
+                Forms\Components\DatePicker::make('tanggal_mulai')
+                    ->label('Tanggal Mulai')
+                    ->required(),
+                Forms\Components\DatePicker::make('tanggal_selesai')
+                    ->label('Tanggal Selesai (Opsional)'),
+                Forms\Components\Textarea::make('keterangan')
+                    ->label('Keterangan Tambahan')
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -45,6 +57,11 @@ class KalenderAkademikResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

@@ -17,39 +17,58 @@ class MataKuliahResource extends Resource
     protected static ?string $navigationGroup = 'Akademik & Kurikulum';
     protected static ?string $label = 'Mata Kuliah';
 
+    protected static ?string $modelLabel = 'Mata Kuliah';
+    protected static ?string $pluralModelLabel = 'Data Mata Kuliah';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('kode')->required(),
-                Forms\Components\TextInput::make('nama')->required(),
-                Forms\Components\TextInput::make('sks')->numeric()->required()->default(3),
-                Forms\Components\Select::make('semester')
-                    ->options([
-                        1 => 'Semester 1',
-                        2 => 'Semester 2',
-                        3 => 'Semester 3',
-                        4 => 'Semester 4',
-                        5 => 'Semester 5',
-                        6 => 'Semester 6',
-                        7 => 'Semester 7',
-                        8 => 'Semester 8',
-                    ])
-                    ->required(),
-                Forms\Components\Select::make('sifat')
-                    ->options([
-                        'Wajib' => 'Wajib',
-                        'Pilihan KBK' => 'Pilihan KBK',
-                        'Pilihan Bebas' => 'Pilihan Bebas',
-                    ])
-                    ->default('Wajib')
-                    ->required(),
-                Forms\Components\TextInput::make('prasyarat'),
-                Forms\Components\Select::make('kelompok_keahlian_id')
-                    ->relationship('kelompokKeahlian', 'nama')
-                    ->searchable()
-                    ->preload(),
-            ]);
+                Forms\Components\Group::make()->schema([
+                    Forms\Components\Section::make('Informasi Mata Kuliah')
+                        ->schema([
+                            Forms\Components\TextInput::make('kode')
+                                ->required()
+                                ->label('Kode MK'),
+                            Forms\Components\TextInput::make('nama')
+                                ->required()
+                                ->label('Nama Mata Kuliah'),
+                            Forms\Components\Select::make('kelompok_keahlian_id')
+                                ->relationship('kelompokKeahlian', 'nama')
+                                ->searchable()
+                                ->preload()
+                                ->label('Kelompok Keahlian (Opsional)')
+                                ->columnSpanFull(),
+                        ])->columns(2),
+                ])->columnSpan(['lg' => 2]),
+
+                Forms\Components\Group::make()->schema([
+                    Forms\Components\Section::make('Sistem SKS & Penjadwalan')
+                        ->schema([
+                            Forms\Components\TextInput::make('sks')
+                                ->numeric()
+                                ->required()
+                                ->default(3)
+                                ->label('Beban SKS'),
+                            Forms\Components\Select::make('semester')
+                                ->options([
+                                    1 => 'Semester 1', 2 => 'Semester 2', 3 => 'Semester 3', 4 => 'Semester 4',
+                                    5 => 'Semester 5', 6 => 'Semester 6', 7 => 'Semester 7', 8 => 'Semester 8',
+                                ])
+                                ->required(),
+                            Forms\Components\Select::make('sifat')
+                                ->options([
+                                    'Wajib' => 'Wajib',
+                                    'Pilihan KBK' => 'Pilihan KBK',
+                                    'Pilihan Bebas' => 'Pilihan Bebas',
+                                ])
+                                ->default('Wajib')
+                                ->required(),
+                            Forms\Components\TextInput::make('prasyarat')
+                                ->label('MK Prasyarat (Opsional)'),
+                        ]),
+                ])->columnSpan(['lg' => 1]),
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
@@ -79,6 +98,11 @@ class MataKuliahResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

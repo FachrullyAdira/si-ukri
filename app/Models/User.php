@@ -34,6 +34,33 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        $panelId = $panel->getId();
+
+        // Super Admin memiliki akses penuh ke seluruh panel sistem
+        if ($this->hasRole('Super Admin')) {
+            return true;
+        }
+
+        // Panel portal publik & login dapat diakses semua pengguna
+        if ($panelId === 'portal') {
+            return true;
+        }
+
+        // Panel Superadmin hanya untuk peran pengelola internal
+        if ($panelId === 'admin') {
+            return $this->hasRole(['Admin Akademik', 'Admin Kemahasiswaan', 'Editor Konten']);
+        }
+
+        // Panel Dosen khusus dosen pengajar
+        if ($panelId === 'dosen') {
+            return $this->hasRole('Dosen');
+        }
+
+        // Panel Mahasiswa khusus mahasiswa aktif
+        if ($panelId === 'mahasiswa') {
+            return $this->hasRole('Mahasiswa');
+        }
+
+        return false;
     }
 }

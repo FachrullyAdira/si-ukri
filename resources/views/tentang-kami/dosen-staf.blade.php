@@ -12,8 +12,13 @@
                 @forelse($dosenStafs as $dosen)
                     <div class="bg-brand-lightbg rounded-2xl border border-slate-200/80 p-6 shadow-sm hover:shadow-md transition-all space-y-4 hover:border-brand-green">
                         <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 bg-gradient-to-tr from-brand-green to-emerald-700 text-white rounded-2xl flex items-center justify-center font-poppins font-bold text-xl shadow-md">
-                                {{ substr($dosen->nama, 0, 2) }}
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-gradient-to-tr from-brand-green to-emerald-700 text-white flex items-center justify-center font-poppins font-bold text-xl shadow-md flex-shrink-0 relative">
+                                @if($dosen->foto_url)
+                                    <img src="{{ $dosen->foto_url }}" alt="{{ $dosen->nama }}" class="w-full h-full object-cover" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                                    <span class="hidden font-poppins font-bold text-xl">{{ substr($dosen->nama, 0, 2) }}</span>
+                                @else
+                                    <span>{{ substr($dosen->nama, 0, 2) }}</span>
+                                @endif
                             </div>
                             <div>
                                 <h3 class="font-poppins font-bold text-base text-slate-900 leading-snug">{{ $dosen->nama }}</h3>

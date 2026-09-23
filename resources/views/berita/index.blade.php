@@ -29,19 +29,30 @@
             <!-- Articles Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @forelse($beritas as $berita)
-                    <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 flex flex-col hover:border-brand-green transition-all">
-                        <div class="h-48 bg-gradient-to-tr from-brand-green to-emerald-900 text-white p-6 font-poppins font-bold flex items-center justify-center text-center shadow-inner">
-                            {{ $berita->judul }}
-                        </div>
+                    <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200/90 flex flex-col hover:border-brand-green transition-all group">
+                        @if($berita->cover_url)
+                            <div class="h-48 overflow-hidden relative group-hover:opacity-95 transition-all bg-slate-900">
+                                <img src="{{ $berita->cover_url }}" alt="{{ $berita->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
+                                <span class="absolute top-3 left-4 text-[10px] font-bold text-white bg-brand-green/90 backdrop-blur-sm border border-brand-green/40 px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">{{ $berita->kategori }}</span>
+                            </div>
+                        @else
+                            <div class="h-48 bg-gradient-to-tr from-brand-darkgreen via-brand-green to-emerald-800 text-white p-6 font-poppins font-bold flex items-center justify-center text-center shadow-inner relative overflow-hidden">
+                                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                                <span class="relative z-10 leading-snug group-hover:scale-105 transition-transform">{{ $berita->judul }}</span>
+                            </div>
+                        @endif
                         <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
                             <div>
-                                <span class="text-xs font-semibold text-brand-green bg-brand-green/10 px-2.5 py-1 rounded-full">{{ $berita->kategori }}</span>
-                                <h3 class="font-poppins font-bold text-lg text-slate-800 mt-3 leading-snug">
-                                    <a href="{{ route('berita.show', $berita->slug) }}" class="hover:text-brand-green transition-colors">{{ $berita->judul }}</a>
+                                @if(!$berita->cover_url)
+                                    <span class="text-xs font-semibold text-brand-green bg-brand-green/10 px-2.5 py-1 rounded-full">{{ $berita->kategori }}</span>
+                                @endif
+                                <h3 class="font-poppins font-bold text-lg text-slate-900 mt-2 leading-snug group-hover:text-brand-green transition-colors">
+                                    <a href="{{ route('berita.show', $berita->slug) }}">{{ $berita->judul }}</a>
                                 </h3>
                                 <p class="text-xs text-slate-500 mt-2">{{ \Carbon\Carbon::parse($berita->tanggal_publikasi)->translatedFormat('d F Y') }} &bull; Oleh {{ $berita->penulis ?? 'Humas SI UKRI' }}</p>
                             </div>
-                            <a href="{{ route('berita.show', $berita->slug) }}" class="text-xs font-semibold text-brand-green hover:underline flex items-center">Baca Selengkapnya &rarr;</a>
+                            <a href="{{ route('berita.show', $berita->slug) }}" class="text-xs font-bold text-brand-green hover:underline flex items-center">Baca Selengkapnya &rarr;</a>
                         </div>
                     </article>
                 @empty

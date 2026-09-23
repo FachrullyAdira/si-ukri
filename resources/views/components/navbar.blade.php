@@ -35,7 +35,7 @@
                         <span>Tentang Kami</span>
                         <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
-                    <div x-show="openDropdown === 'tentang'" x-transition class="absolute left-0 mt-1 w-60 bg-white border border-slate-200/90 rounded-2xl shadow-2xl py-2 z-50 backdrop-blur-lg">
+                    <div x-show="openDropdown === 'tentang'" x-cloak x-transition class="absolute left-0 mt-1 w-60 bg-white border border-slate-200/90 rounded-2xl shadow-2xl py-2 z-50 backdrop-blur-lg">
                         <a href="/tentang-kami/sejarah" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-brand-green font-medium transition-colors">Sejarah SI UKRI</a>
                         <a href="/tentang-kami/visi-misi" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-brand-green font-medium transition-colors">Visi & Misi</a>
                         <a href="/tentang-kami/akreditasi" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-brand-green font-medium transition-colors">Akreditasi BAN-PT</a>
@@ -50,7 +50,7 @@
                         <span>Akademik</span>
                         <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
-                    <div x-show="openDropdown === 'akademik'" x-transition class="absolute left-0 mt-1 w-60 bg-white border border-slate-200/90 rounded-2xl shadow-2xl py-2 z-50 backdrop-blur-lg">
+                    <div x-show="openDropdown === 'akademik'" x-cloak x-transition class="absolute left-0 mt-1 w-60 bg-white border border-slate-200/90 rounded-2xl shadow-2xl py-2 z-50 backdrop-blur-lg">
                         <a href="/akademik/struktur-kurikulum" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-brand-green font-medium transition-colors">Struktur Kurikulum</a>
                         <a href="/akademik/kelompok-keahlian" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-brand-green font-medium transition-colors">Kelompok Keahlian (KBK)</a>
                         <a href="/akademik/mata-kuliah" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-brand-green font-medium transition-colors">Daftar Mata Kuliah</a>
@@ -64,7 +64,7 @@
                         <span>Kemahasiswaan</span>
                         <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
-                    <div x-show="openDropdown === 'kemahasiswaan'" x-transition class="absolute left-0 mt-1 w-60 bg-white border border-slate-200/90 rounded-2xl shadow-2xl py-2 z-50 backdrop-blur-lg">
+                    <div x-show="openDropdown === 'kemahasiswaan'" x-cloak x-transition class="absolute left-0 mt-1 w-60 bg-white border border-slate-200/90 rounded-2xl shadow-2xl py-2 z-50 backdrop-blur-lg">
                         <a href="/kemahasiswaan/prestasi" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-brand-green font-medium transition-colors">Galeri Prestasi</a>
                         <a href="/kemahasiswaan/hima" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-brand-green font-medium transition-colors">Himpunan Mahasiswa (HIMASI)</a>
                         <a href="/kemahasiswaan/alumni" class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-brand-green font-medium transition-colors">Testimoni & Tracer Alumni</a>
@@ -78,10 +78,14 @@
                 <a href="/kontak" class="px-3.5 py-2 rounded-xl text-slate-700 hover:text-brand-green hover:bg-emerald-50/80 transition-all">Kontak</a>
             </nav>
 
-            <!-- CTA Button (PMB Direct Link to https://pmb.ukri.ac.id/) -->
-            <div class="hidden lg:flex items-center space-x-3">
-                <a href="https://pmb.ukri.ac.id/" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-brand-red via-rose-600 to-red-600 hover:from-red-600 hover:to-brand-red text-white font-bold text-sm px-6 py-2.5 rounded-xl shadow-lg hover:shadow-red-500/30 transition-all transform hover:-translate-y-0.5">
+            <!-- CTA Button (PMB & Login) -->
+            <div class="hidden lg:flex items-center space-x-2.5">
+                <a href="https://pmb.ukri.ac.id/" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-brand-red via-rose-600 to-red-600 hover:from-red-600 hover:to-brand-red text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-md hover:shadow-red-500/30 transition-all transform hover:-translate-y-0.5">
                     PMB 2026/2027
+                </a>
+                <a href="/login" class="bg-brand-green hover:bg-brand-darkgreen text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-md hover:shadow-emerald-700/30 transition-all flex items-center gap-1.5 transform hover:-translate-y-0.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                    <span>Login</span>
                 </a>
             </div>
 
@@ -98,7 +102,7 @@
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <div x-show="mobileOpen" x-transition class="lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3 font-inter text-sm shadow-2xl">
+    <div x-show="mobileOpen" x-cloak x-transition class="lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3 font-inter text-sm shadow-2xl">
         <a href="/" class="block px-3 py-2 rounded-xl text-slate-700 hover:bg-emerald-50 hover:text-brand-green font-medium">Beranda</a>
 
         <div class="space-y-1">
@@ -128,9 +132,13 @@
         <a href="/berita" class="block px-3 py-2 rounded-xl text-slate-700 hover:bg-emerald-50 hover:text-brand-green font-medium">Berita</a>
         <a href="/kontak" class="block px-3 py-2 rounded-xl text-slate-700 hover:bg-emerald-50 hover:text-brand-green font-medium">Kontak</a>
 
-        <div class="pt-2">
-            <a href="https://pmb.ukri.ac.id/" target="_blank" rel="noopener noreferrer" class="block w-full bg-gradient-to-r from-brand-red to-rose-600 text-white text-center font-bold py-3 rounded-xl shadow-md">
+        <div class="pt-2 grid grid-cols-2 gap-2.5">
+            <a href="https://pmb.ukri.ac.id/" target="_blank" rel="noopener noreferrer" class="block w-full bg-gradient-to-r from-brand-red to-rose-600 text-white text-center font-bold py-2.5 rounded-xl shadow-md text-xs">
                 PMB 2026/2027
+            </a>
+            <a href="/login" class="block w-full bg-brand-green hover:bg-brand-darkgreen text-white text-center font-bold py-2.5 rounded-xl shadow-md text-xs flex items-center justify-center gap-1.5 transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                <span>Login</span>
             </a>
         </div>
     </div>

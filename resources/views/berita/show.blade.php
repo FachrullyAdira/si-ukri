@@ -19,6 +19,12 @@
                 </div>
             </div>
 
+            @if($berita->cover_url)
+                <div class="rounded-3xl overflow-hidden shadow-lg aspect-[16/9] w-full bg-slate-900">
+                    <img src="{{ $berita->cover_url }}" alt="{{ $berita->judul }}" class="w-full h-full object-cover">
+                </div>
+            @endif
+
             <div class="prose prose-slate max-w-none text-slate-700 font-inter leading-relaxed space-y-4">
                 {!! $berita->isi !!}
             </div>

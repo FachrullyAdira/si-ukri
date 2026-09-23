@@ -12,8 +12,12 @@
                 @forelse($kelompokKeahlians as $kbk)
                     <div class="bg-brand-lightbg p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all space-y-6 flex flex-col justify-between hover:border-brand-green">
                         <div class="space-y-4">
-                            <div class="w-14 h-14 bg-brand-green text-white rounded-2xl flex items-center justify-center font-poppins font-bold text-xl shadow-md">
-                                {{ substr($kbk->nama, 0, 2) }}
+                            <div class="w-16 h-16 bg-gradient-to-tr from-brand-green to-emerald-700 text-white rounded-2xl flex items-center justify-center font-poppins font-bold text-xl shadow-md overflow-hidden p-3">
+                                @if($kbk->ikon_url)
+                                    <img src="{{ $kbk->ikon_url }}" alt="{{ $kbk->nama }}" class="w-full h-full object-contain">
+                                @else
+                                    {{ substr($kbk->nama, 0, 2) }}
+                                @endif
                             </div>
                             <h3 class="font-poppins font-bold text-2xl text-slate-900">{{ $kbk->nama }}</h3>
                             <p class="text-sm text-slate-600 leading-relaxed">{{ $kbk->deskripsi }}</p>

@@ -55,3 +55,14 @@ Route::post('kontak', [KontakController::class, 'store'])->middleware('throttle:
 Route::get('pendaftaran', function () {
     return redirect()->away('https://pmb.ukri.ac.id/');
 })->name('pendaftaran');
+
+// Redirect login & admin shortcut routes ke panel admin
+Route::get('login', function () {
+    return redirect()->route('filament.admin.auth.login');
+})->name('login');
+
+Route::get('admin', function () {
+    return redirect('/superadmin');
+});
+
+

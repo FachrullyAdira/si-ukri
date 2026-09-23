@@ -14,8 +14,11 @@ class AkreditasiResource extends Resource
 {
     protected static ?string $model = Akreditasi::class;
     protected static ?string $navigationIcon = 'heroicon-o-shield-check';
-    protected static ?string $navigationGroup = 'Profil & Legalitas';
+    protected static ?string $navigationGroup = 'Publikasi';
     protected static ?string $label = 'Akreditasi Prodi';
+
+    protected static ?string $modelLabel = 'Akreditasi';
+    protected static ?string $pluralModelLabel = 'Data Akreditasi';
 
     public static function form(Form $form): Form
     {
@@ -52,6 +55,11 @@ class AkreditasiResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

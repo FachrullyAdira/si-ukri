@@ -14,8 +14,11 @@ class PesanKontakResource extends Resource
 {
     protected static ?string $model = PesanKontak::class;
     protected static ?string $navigationIcon = 'heroicon-o-inbox';
-    protected static ?string $navigationGroup = 'Pengaturan & Sistem';
+    protected static ?string $navigationGroup = 'Publikasi';
     protected static ?string $label = 'Pesan Masuk Kontak & PMB';
+
+    protected static ?string $modelLabel = 'Pesan Kontak';
+    protected static ?string $pluralModelLabel = 'Data Pesan Kontak';
 
     public static function form(Form $form): Form
     {
@@ -45,6 +48,11 @@ class PesanKontakResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

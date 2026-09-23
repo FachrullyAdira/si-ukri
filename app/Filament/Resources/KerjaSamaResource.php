@@ -14,8 +14,11 @@ class KerjaSamaResource extends Resource
 {
     protected static ?string $model = KerjaSama::class;
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
-    protected static ?string $navigationGroup = 'Profil & Legalitas';
+    protected static ?string $navigationGroup = 'Publikasi';
     protected static ?string $label = 'Kemitraan & Kerja Sama';
+
+    protected static ?string $modelLabel = 'Kerja Sama';
+    protected static ?string $pluralModelLabel = 'Data Kerja Sama';
 
     public static function form(Form $form): Form
     {
@@ -49,6 +52,11 @@ class KerjaSamaResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

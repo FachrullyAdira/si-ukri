@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Alpine.js cloak - hide elements until Alpine initializes */
+[x-cloak] { display: none !important; }
+
+/* Base Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F8FAFC;
+    color: #1E293B;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+.gradient-text-brand {
+    background: linear-gradient(135deg, #0A6B39 0%, #EF3829 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-border-top {
+    position: relative;
+}
+
+.gradient-border-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #EF3829 0%, #F59E0B 50%, #0A6B39 100%);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}

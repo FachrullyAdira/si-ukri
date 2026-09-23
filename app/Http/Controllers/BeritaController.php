@@ -9,7 +9,7 @@ class BeritaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Berita::where('tanggal_publikasi', '<=', now());
+        $query = Berita::with('media')->where('tanggal_publikasi', '<=', now());
 
         if ($request->filled('kategori')) {
             $query->where('kategori', $request->kategori);
@@ -38,7 +38,8 @@ class BeritaController extends Controller
             ->orWhere('id', $slug)
             ->firstOrFail();
 
-        $relatedBeritas = Berita::where('id', '!=', $berita->id)
+        $relatedBeritas = Berita::with('media')
+            ->where('id', '!=', $berita->id)
             ->where('kategori', $berita->kategori)
             ->take(3)
             ->get();

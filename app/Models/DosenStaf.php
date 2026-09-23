@@ -21,9 +21,36 @@ class DosenStaf extends Model implements HasMedia
         return $this->belongsTo(KelompokKeahlian::class);
     }
 
+    protected $appends = ['foto_url'];
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('foto_profil')
              ->singleFile();
+    }
+
+    public function getFotoUrlAttribute(): ?string
+    {
+        $url = null;
+        if ($this->hasMedia('foto_profil')) {
+            $url = $this->getFirstMediaUrl('foto_profil');
+        } elseif (!empty($this->foto)) {
+            $url = $this->foto;
+        }
+
+        if (empty($url)) {
+            return null;
+        }
+
+        if (str_starts_with($url, 'http://') || str_starts_with($url, 'https://')) {
+            return $url;
+        }
+
+        $cleanPath = ltrim($url, '/');
+        if (!str_starts_with($cleanPath, 'storage/')) {
+            $cleanPath = 'storage/' . $cleanPath;
+        }
+
+        return asset($cleanPath);
     }
 }

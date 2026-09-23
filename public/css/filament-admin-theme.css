@@ -15,72 +15,120 @@ h1, h2, h3, h4, h5, h6, .fi-header-heading, .fi-sidebar-group-label {
     font-family: 'Poppins', sans-serif !important;
 }
 
-/* Sidebar Branding & Navigation Styling */
-.fi-sidebar {
-    background-color: #064e27 !important; /* Deep Forest Green */
-    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+/* Topbar - Ultra Modern Glassmorphism & Premium Branding */
+.fi-topbar {
+    background: rgba(255, 255, 255, 0.94) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 2px solid #0A6B39 !important;
+    box-shadow: 0 4px 20px -2px rgba(10, 107, 57, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 30 !important;
 }
 
-.fi-sidebar-header {
-    background: linear-gradient(135deg, #054f2a 0%, #064e27 100%) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding: 1.25rem 1rem !important;
+.fi-topbar nav {
+    height: 4.25rem !important;
 }
 
-.fi-sidebar-header-brand-name {
-    color: #ffffff !important;
-    font-family: 'Poppins', sans-serif !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.02em !important;
-}
-
-.fi-sidebar-nav-groups {
-    padding-top: 0.75rem !important;
-}
-
-.fi-sidebar-group-label {
-    color: #f59e0b !important; /* Gold Accent */
-    font-size: 0.7rem !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
-    margin-top: 0.75rem !important;
-}
-
-.fi-sidebar-item-button {
-    color: #e8f5e9 !important;
+/* Topbar Notification & Action Buttons */
+.fi-topbar button, .fi-topbar-database-notifications-btn {
     border-radius: 0.75rem !important;
     transition: all 0.2s ease !important;
-    margin-bottom: 0.25rem !important;
 }
 
-.fi-sidebar-item-button:hover {
-    background-color: rgba(255, 255, 255, 0.12) !important;
-    color: #ffffff !important;
-    transform: translateX(3px) !important;
+.fi-topbar-database-notifications-btn:hover {
+    background-color: #ecfdf5 !important;
+    color: #0A6B39 !important;
+    transform: translateY(-1px) !important;
 }
 
-.fi-sidebar-item-active .fi-sidebar-item-button {
-    background: linear-gradient(90deg, #0a6b39 0%, #054f2a 100%) !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    box-shadow: 0 4px 12px rgba(10, 107, 57, 0.3) !important;
-    border-left: 4px solid #f59e0b !important;
+/* User Menu Avatar Glow Ring */
+.fi-user-avatar {
+    border-radius: 9999px !important;
+    box-shadow: 0 0 0 2px rgba(10, 107, 57, 0.25), 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.2s ease !important;
 }
 
-.fi-sidebar-item-icon {
-    color: #f59e0b !important;
+.fi-user-avatar:hover {
+    box-shadow: 0 0 0 2.5px #0A6B39, 0 4px 12px rgba(10, 107, 57, 0.3) !important;
+    transform: scale(1.04) !important;
 }
 
-.fi-sidebar-item-active .fi-sidebar-item-icon {
-    color: #ffffff !important;
+/* =========================================
+   TOPBAR BREADCRUMBS STYLING
+   ========================================= */
+
+/* Sembunyikan breadcrumbs bawaan di dalam area konten header halaman */
+.fi-page-header .fi-breadcrumbs,
+.fi-header > div > .fi-breadcrumbs,
+.fi-header .fi-breadcrumbs:not(#topbar-breadcrumbs-target .fi-breadcrumbs) {
+    display: none !important;
 }
 
-/* Topbar Header Bar */
-.fi-topbar {
+/* Tampilkan breadcrumb di dalam topbar persis seperti bentuk bawaan Filament */
+#topbar-breadcrumbs-target .fi-breadcrumbs {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+#topbar-breadcrumbs-target .fi-breadcrumbs-list {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#topbar-breadcrumbs-target .fi-breadcrumbs-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+#topbar-breadcrumbs-target .fi-breadcrumbs-item-label {
+    font-size: 0.875rem !important; /* 14px text-sm */
+    font-weight: 500 !important;
+    color: #475569 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transition: all 0.15s ease !important;
+}
+
+#topbar-breadcrumbs-target a.fi-breadcrumbs-item-label {
+    color: #0284c7 !important;
+    text-decoration: none !important;
+}
+
+#topbar-breadcrumbs-target a.fi-breadcrumbs-item-label:hover {
+    color: #0A6B39 !important;
+    text-decoration: underline !important;
+}
+
+#topbar-breadcrumbs-target .fi-breadcrumbs-item:last-child .fi-breadcrumbs-item-label {
+    font-weight: 500 !important;
+    color: #475569 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#topbar-breadcrumbs-target .fi-breadcrumbs-item-separator {
+    width: 1rem !important;
+    height: 1rem !important;
+    color: #94a3b8 !important;
+}
+
+/* Sidebar shadow separator */
+.fi-sidebar {
+    border-right: 1px solid #e2e8f0 !important;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.06) !important;
     background-color: #ffffff !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
 /* Dashboard Cards & Widgets */
@@ -122,5 +170,62 @@ h1, h2, h3, h4, h5, h6, .fi-header-heading, .fi-sidebar-group-label {
 .fi-btn-danger {
     background: linear-gradient(135deg, #ef3829 0%, #d32f2f 100%) !important;
     border: none !important;
-    box-shadow: 0 4px 12px rgba(239, 56, 41, 0.25) !important;
+}
+
+/* =========================================
+   CUSTOM LOGIN LAYOUT (MOCKUP STYLE)
+   ========================================= */
+
+/* Background with image and dark overlay */
+.fi-simple-layout {
+    background-image: url('../images/bg-login.png') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    position: relative;
+    z-index: 1;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 100vh !important;
+}
+
+/* Dark elegant gradient overlay */
+.fi-simple-layout::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(6, 78, 39, 0.7) 100%);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+/* The Login Card */
+main.fi-simple-main {
+    width: 100% !important;
+    max-width: 450px !important; /* Keep it compact like the mockup */
+    margin: 0 auto !important;
+    background-color: #ffffff !important;
+    border-radius: 1.5rem !important; /* Rounded corners */
+    border-top: 8px solid #064e27 !important; /* Thick green top border */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+    position: relative;
+    z-index: 10;
+}
+
+/* Remove default my-16 to center perfectly */
+@media (min-width: 640px) {
+    main.fi-simple-main {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+/* Styling the heading */
+.fi-simple-header-heading {
+    color: #1e293b !important;
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
 }

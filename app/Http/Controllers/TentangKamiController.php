@@ -32,7 +32,7 @@ class TentangKamiController extends Controller
 
     public function dosenStaf()
     {
-        $dosenStafs = DosenStaf::with('kelompokKeahlian')
+        $dosenStafs = DosenStaf::with(['kelompokKeahlian', 'media'])
             ->orderBy('urutan_struktural', 'asc')
             ->get();
 

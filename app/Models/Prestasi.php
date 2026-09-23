@@ -14,10 +14,36 @@ class Prestasi extends Model implements HasMedia
 
     protected $table = 'prestasis';
     protected $guarded = ['id'];
+    protected $appends = ['foto_url'];
 
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('foto')
              ->singleFile();
+    }
+
+    public function getFotoUrlAttribute(): ?string
+    {
+        $url = null;
+        if ($this->hasMedia('foto')) {
+            $url = $this->getFirstMediaUrl('foto');
+        } elseif (!empty($this->foto)) {
+            $url = $this->foto;
+        }
+
+        if (empty($url)) {
+            return null;
+        }
+
+        if (str_starts_with($url, 'http://') || str_starts_with($url, 'https://')) {
+            return $url;
+        }
+
+        $cleanPath = ltrim($url, '/');
+        if (!str_starts_with($cleanPath, 'storage/')) {
+            $cleanPath = 'storage/' . $cleanPath;
+        }
+
+        return asset($cleanPath);
     }
 }

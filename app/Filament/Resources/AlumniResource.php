@@ -17,6 +17,9 @@ class AlumniResource extends Resource
     protected static ?string $navigationGroup = 'Kemahasiswaan & Alumni';
     protected static ?string $label = 'Data Alumni & Tracer';
 
+    protected static ?string $modelLabel = 'Alumni';
+    protected static ?string $pluralModelLabel = 'Data Alumni';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -46,6 +49,11 @@ class AlumniResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

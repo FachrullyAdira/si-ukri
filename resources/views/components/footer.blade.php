@@ -38,8 +38,8 @@
             <div class="space-y-3">
                 <h3 class="font-poppins font-bold text-white text-base tracking-wide">Layanan & Sistem</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a href="#" class="hover:text-amber-300 transition-colors flex items-center"><span class="text-amber-400 font-bold mr-2">&rsaquo;</span> SIAKAD UKRI Portal</a></li>
-                    <li><a href="#" class="hover:text-amber-300 transition-colors flex items-center"><span class="text-amber-400 font-bold mr-2">&rsaquo;</span> E-Learning LMS SI</a></li>
+                    <li><a href="/superadmin" class="hover:text-amber-300 transition-colors flex items-center"><span class="text-amber-400 font-bold mr-2">&rsaquo;</span> SIAKAD UKRI Portal</a></li>
+                    <li><a href="/superadmin" class="hover:text-amber-300 transition-colors flex items-center"><span class="text-amber-400 font-bold mr-2">&rsaquo;</span> E-Learning LMS SI</a></li>
                     <li><a href="#" class="hover:text-amber-300 transition-colors flex items-center"><span class="text-amber-400 font-bold mr-2">&rsaquo;</span> Perpustakaan Digital</a></li>
                     <li><a href="#" class="hover:text-amber-300 transition-colors flex items-center"><span class="text-amber-400 font-bold mr-2">&rsaquo;</span> Repositori Skripsi/TA</a></li>
                     <li><a href="https://pmb.ukri.ac.id/" target="_blank" rel="noopener noreferrer" class="hover:text-amber-300 transition-colors flex items-center"><span class="text-amber-400 font-bold mr-2">&rsaquo;</span> Pendaftaran PMB Online</a></li>

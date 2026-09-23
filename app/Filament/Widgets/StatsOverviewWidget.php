@@ -29,32 +29,38 @@ class StatsOverviewWidget extends BaseWidget
             Stat::make('Akreditasi Program Studi', $akreditasi->peringkat ?? 'A / Unggul')
                 ->description('SK BAN-PT Resmi (' . ($akreditasi->masa_berlaku ?? '2023 - 2028') . ')')
                 ->descriptionIcon('heroicon-m-academic-cap')
-                ->color('success'),
+                ->color('success')
+                ->url(\App\Filament\Resources\AkreditasiResource::getUrl('index')),
 
             Stat::make('Dosen & Staf Pengajar', $totalDosen . ' Orang')
                 ->description('Tenaga Pengajar Aktif SI UKRI')
                 ->descriptionIcon('heroicon-m-user-group')
-                ->color('primary'),
+                ->color('primary')
+                ->url(\App\Filament\Resources\DosenStafResource::getUrl('index')),
 
             Stat::make('Total SKS Kurikulum', $totalSks . ' SKS')
                 ->description('Mata Kuliah Wajib & Pilihan KBK')
                 ->descriptionIcon('heroicon-m-book-open')
-                ->color('warning'),
+                ->color('warning')
+                ->url(\App\Filament\Resources\MataKuliahResource::getUrl('index')),
 
             Stat::make('Berita & Artikel', $totalBerita . ' Publikasi')
                 ->description('Pengumuman & Kegiatan Akademik')
                 ->descriptionIcon('heroicon-m-newspaper')
-                ->color('info'),
+                ->color('info')
+                ->url(\App\Filament\Resources\BeritaResource::getUrl('index')),
 
             Stat::make('Prestasi Mahasiswa', $totalPrestasi . ' Penghargaan')
                 ->description('Kompetisi Nasional & Internasional')
                 ->descriptionIcon('heroicon-m-trophy')
-                ->color('amber'),
+                ->color('amber')
+                ->url(\App\Filament\Resources\PrestasiResource::getUrl('index')),
 
             Stat::make('Pesan Kontak Masuk', $pesanBaru . ' Pesan')
                 ->description('Pertanyaan PMB & Publik')
                 ->descriptionIcon('heroicon-m-envelope')
-                ->color('danger'),
+                ->color('danger')
+                ->url(\App\Filament\Resources\PesanKontakResource::getUrl('index')),
         ];
     }
 }
