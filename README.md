@@ -1,6 +1,6 @@
 # SI_UKRI
 
-![Logo Himas](/public/images/logo-himasi.svg)
+![Logo SI UKRI](/public/images/logo-si-ukri.png)
 
 ## Overview
 
